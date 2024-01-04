@@ -17,34 +17,46 @@
 
       <div class="row justify-content-center">
         <div class="col-6">
-          <form>
+          <form
+            th:action="@{/appointments}"
+            th:object="${appointment}"
+            method="post"
+          >
             <label class="form-label">Consultorio</label>
-            <select class="form-control mb-3">
-              <option></option>
+            <select th:field="*{doctorsOffice.id}" class="form-control mb-3">
               <option
                 th:each="doctorsOffice : ${doctorOffices}"
                 th:text="${doctorsOffice.officeNum}"
+                th:value="${doctorsOffice.id}"
               >
                 Hello
               </option>
             </select>
 
             <label class="col-form-label">Doctor</label>
-            <select class="form-control mb-3">
-              <option></option>
+            <select th:field="*{doctor.id}" class="form-control mb-3">
               <option
                 th:each="doctor : ${doctors}"
                 th:text="${doctor.name} + ' ' +  ${doctor.fathersLastName} + ' ' +  ${doctor.mothersLastName}"
+                th:value="${doctor.id}"
               >
                 Hello
               </option>
             </select>
 
             <label class="col-form-label">Fecha y hora de consulta</label>
-            <input class="form-control mb-3" type="datetime-local" />
+            <input
+              th:field="*{time}"
+              class="form-control mb-3"
+              type="datetime-local"
+            />
 
             <label class="col-form-label">Nombre del paciente</label>
-            <input class="form-control mb-3" type="text" />
+            <input
+              th:field="*{patientsName}"
+              class="form-control mb-3"
+              type="text"
+            />
 
             <div class="row justify-content-center">
               <div class="col-auto">

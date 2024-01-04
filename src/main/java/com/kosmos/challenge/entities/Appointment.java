@@ -6,12 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.ZonedDateTime;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "appointments")
@@ -27,6 +28,9 @@ public class Appointment {
 
   @ManyToOne private Doctor doctor;
   @ManyToOne private DoctorsOffice doctorsOffice;
-  private ZonedDateTime time;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+  private Date time;
+
   private String patientsName;
 }
