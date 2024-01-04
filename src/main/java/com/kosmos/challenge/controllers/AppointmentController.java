@@ -3,6 +3,7 @@ package com.kosmos.challenge.controllers;
 import com.kosmos.challenge.entities.Appointment;
 import com.kosmos.challenge.repositories.DoctorRepository;
 import com.kosmos.challenge.repositories.DoctorsOfficeRepository;
+import com.kosmos.challenge.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AppointmentController {
   @Autowired private DoctorRepository doctorRepository;
   @Autowired private DoctorsOfficeRepository doctorsOfficeRepository;
+  @Autowired private AppointmentService appointmentService;
 
   @GetMapping("/create")
   public String getCreateAppointmentView(Model model) {
@@ -29,10 +31,7 @@ public class AppointmentController {
 
   @PostMapping
   public String createAppointment(@ModelAttribute Appointment appointment) {
-    System.out.println(appointment.getDoctor().getId());
-    System.out.println(appointment.getDoctorsOffice().getId());
-    System.out.println(appointment.getTime());
-    System.out.println(appointment.getPatientsName());
+    appointmentService.createAppointment(appointment);
     return "createAppointment";
   }
 }
